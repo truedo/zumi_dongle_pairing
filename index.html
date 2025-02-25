@@ -1,35 +1,11 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>주미 미니 동글 페어링</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 400px;
-            margin: 20px auto;
-            padding: 20px;
-        }
-        .logo {
-            width: 300px;
-            height: 200px;
-            margin-bottom: 20px;
-        }
-        .status {
-            margin: 10px 0;
-            color: red;
-        }
-        button {
-            margin: 5px 0;
-            padding: 8px 16px;
-        }
-        #textOutput {
-            width: 100%;
-            height: 100px;
-            margin: 10px 0;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <img src="logo.png" class="logo" alt="로고">
@@ -47,100 +23,6 @@
     
     <button id="disconnectBtn">연결 끊기</button>
 
-    <script>
-        let port;
-        let reader;
-        let readLoopActive = false;
-
-        // 포트 목록 새로고침
-        async function refreshPorts() {
-            const ports = await navigator.serial.getPorts();
-            const portSelect = document.getElementById('portSelect');
-            portSelect.innerHTML = ports.map(p => 
-                `<option value="${p.getInfo().usbVendorId}">${p.getInfo().usbProductId}</option>`
-            ).join('');
-        }
-
-        // 데이터 수신 처리
-        async function readSerial() {
-            reader = port.readable.getReader();
-            readLoopActive = true;
-            try {
-                while (true) {
-                    const { value, done } = await reader.read();
-                    if (done) break;
-                    const decoder = new TextDecoder();
-                    const text = decoder.decode(value);
-                    document.getElementById('textOutput').value += text + '\n';
-
-                    // 페어링 정보 파싱
-                    const match = text.match(/namezumi-\d{4}/);
-                    if (match) {
-                        const result = match[0].substring(9);
-                        document.getElementById('deviceLabel').textContent = 
-                            `페어링 완료: ${result}`;
-                    }
-                }
-            } catch (error) {
-                console.error('Read error:', error);
-            } finally {
-                reader.releaseLock();
-                readLoopActive = false;
-            }
-        }
-
-        // 연결 버튼 핸들러
-        document.getElementById('connectBtn').addEventListener('click', async () => {
-            try {
-                port = await navigator.serial.requestPort();
-                await port.open({ baudRate: 115200 });
-                
-                document.getElementById('statusLabel').textContent = 
-                    `상태: ${port.getInfo().usbProductId} 연결됨`;
-                document.getElementById('statusLabel').style.color = '#32CD32';
-                document.getElementById('connectBtn').disabled = true;
-                document.getElementById('portSelect').disabled = true;
-                
-                readSerial();
-            } catch (error) {
-                console.error('Connection error:', error);
-                document.getElementById('statusLabel').textContent = '상태: 연결 실패';
-            }
-        });
-
-        // 데이터 전송 공통 함수
-        async function sendData(data) {
-            const writer = port.writable.getWriter();
-            await writer.write(data);
-            writer.releaseLock();
-        }
-
-        // 페어링 시작
-        document.getElementById('pairBtn').addEventListener('click', () => {
-            const btnPress = new Uint8Array([0x24, 0x52, 0xCD, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF]);
-            sendData(btnPress);
-        });
-
-        // 테스트 전송
-        document.getElementById('testBtn').addEventListener('click', () => {
-            const hello = new Uint8Array([0x24, 0x52, 0x01, 0x48, 0x45, 0x4C, 0x4C, 0x4F, 0x21, 0xFF, 0xFF]);
-            sendData(hello);
-        });
-
-        // 연결 끊기
-        document.getElementById('disconnectBtn').addEventListener('click', async () => {
-            if (port) {
-                if (readLoopActive) await reader.cancel();
-                await port.close();
-                document.getElementById('statusLabel').textContent = '상태: 연결 끊김';
-                document.getElementById('connectBtn').disabled = false;
-                document.getElementById('portSelect').disabled = false;
-                document.getElementById('statusLabel').style.color = '#000000';
-            }
-        });
-
-        // 초기화
-        refreshPorts();
-    </script>
+    <script src="serialManager.js"></script>
 </body>
 </html>
