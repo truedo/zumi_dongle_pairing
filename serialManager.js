@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 데이터 수신 처리
     async function readSerial() {
+        elements.textOutput.display ='none';
         reader = port.readable.getReader();
         readLoopActive = true;
         try {
@@ -50,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const match = text.match(/namezumi-\d{4}/);
         if (match) {
             const result = match[0].substring(9);
-            elements.deviceLabel.textContent = `페어링 완료: ${result}`;
+            elements.deviceLabel.textContent = `페어링 완료: zumi-${result}`;
         }
     }
 
@@ -78,7 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // UI 상태 업데이트 (연결시)
     function updateUIOnConnect() {
-        elements.statusLabel.textContent = `상태: ${port.getInfo().usbProductId} 연결됨`;
+       //elements.statusLabel.textContent = `상태: ${port.getInfo().usbProductId} 연결됨`;
+        elements.statusLabel.textContent = `상태: 연결됨`;
         elements.statusLabel.style.color = '#32CD32';
         elements.connectBtn.disabled = true;
         elements.portSelect.disabled = true;
