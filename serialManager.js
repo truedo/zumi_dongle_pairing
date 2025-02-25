@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // DOM 요소 캐싱
     const elements = {
         statusLabel: document.getElementById('statusLabel'),
-        portSelect: document.getElementById('portSelect'),
+        //portSelect: document.getElementById('portSelect'),
         connectBtn: document.getElementById('connectBtn'),
         deviceLabel: document.getElementById('deviceLabel'),
         pairBtn: document.getElementById('pairBtn'),
@@ -17,12 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // 포트 새로고침 기능
-    async function refreshPorts() {
-        const ports = await navigator.serial.getPorts();
-        elements.portSelect.innerHTML = ports.map(p => 
-            `<option value="${p.getInfo().usbVendorId}">${p.getInfo().usbProductId}</option>`
-        ).join('');
-    }
+    // async function refreshPorts() {
+    //     const ports = await navigator.serial.getPorts();
+    //     elements.portSelect.innerHTML = ports.map(p => 
+    //         `<option value="${p.getInfo().usbVendorId}">${p.getInfo().usbProductId}</option>`
+    //     ).join('');
+    // }
 
     // 데이터 수신 처리
     async function readSerial() {
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.statusLabel.textContent = `상태: 연결됨`;
         elements.statusLabel.style.color = '#32CD32';
         elements.connectBtn.disabled = true;
-        elements.portSelect.disabled = true;
+       //elements.portSelect.disabled = true;
     }
 
     // 데이터 전송 공통 함수
@@ -118,13 +118,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function resetUIOnDisconnect() {
         elements.statusLabel.textContent = '상태: 연결 끊김';
         elements.connectBtn.disabled = false;
-        elements.portSelect.disabled = false;
+       // elements.portSelect.disabled = false;
         elements.statusLabel.style.color = '#000000';
     }
 
     // 초기화
     function init() {
-        refreshPorts();
+       // refreshPorts();
         initEventListeners();
     }
 
