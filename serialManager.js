@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (match) {
             const result = match[0].substring(9);
             elements.deviceLabel.textContent = `페어링 완료: zumi-${result}`;
+            elements.deviceLabel.style.color = '#32CD32';
         }
     }
 
@@ -120,6 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.connectBtn.disabled = false;
        // elements.portSelect.disabled = false;
         elements.statusLabel.style.color = '#000000';
+
+        elements.deviceLabel.textContent = `페어링 상태`;
+        elements.deviceLabel.style.color = '#000000';
+
+
     }
 
     // 초기화

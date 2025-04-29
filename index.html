@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,20 +7,20 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <img src="logo.png" class="logo" alt="로고">
-    <div class="status" id="statusLabel">상태: 연결 끊김</div>
-    
-    <button id="connectBtn">연결</button>
-    
-    <div id="deviceLabel">페어링 상태</div>
-    
-    <button id="pairBtn">페어링 시작</button>
-    <button id="testBtn">전송 테스트</button>
-    
-    <textarea id="textOutput" readonly></textarea>
-    
-    <button id="disconnectBtn">연결 끊기</button>
+    <div class="content-box">
+        <img src="logo.png" class="logo" alt="로고">
+        <div class="status" id="statusLabel">상태: 연결 끊김</div>
 
-    <script src="serialManager.js"></script>
+        <button id="connectBtn">연결</button>
+
+        <div id="deviceLabel">페어링 상태</div>
+
+        <button id="pairBtn">페어링 시작</button>
+        <button id="testBtn">전송 테스트</button>
+
+        <textarea id="textOutput" readonly></textarea>
+
+        <button id="disconnectBtn">연결 끊기</button>
+    </div> <script src="serialManager.js"></script>
 </body>
 </html>

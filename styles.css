@@ -1,25 +1,106 @@
 /* styles.css */
 body {
     font-family: Arial, sans-serif;
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
+    background-color: #f0f0f0; /* 배경색 추가 */
+    margin: 0; /* body 기본 마진 제거 */
+    padding: 0; /* body 기본 패딩 제거 */
+    display: flex; /* Flexbox를 사용하여 컨테이너를 중앙에 배치 */
+    justify-content: center; /* 가로 방향 중앙 정렬 */
+    align-items: center; /* 세로 방향 중앙 정렬 (필요시 min-height: 100vh; 추가) */
+    min-height: 100vh; /* 최소 높이를 뷰포트 높이로 설정하여 세로 중앙 정렬 가능하게 함 */
+    box-sizing: border-box; /* 패딩과 보더가 크기에 포함되도록 설정 */
 }
+
+/* 새로운 컨테이너 스타일 */
+.content-box {
+    background-color: #fff; /* 컨테이너 배경색 */
+    max-width: 400px; /* 컨테이너의 최대 너비 */
+    width: 90%; /* 작은 화면에서 너비 조절 */
+    padding: 30px 20px; /* 내부 여백 (상하 좌우) */
+    border: 1px solid #ccc; /* 테두리 */
+    border-radius: 15px; /* 둥근 모서리 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 은은한 그림자 */
+    text-align: center; /* 컨테이너 안의 인라인/인라인-블록 요소 가운데 정렬 */
+    box-sizing: border-box; /* padding과 border를 width에 포함 */
+}
+
 .logo {
+    /* 기존 스타일 */
     width: 300px;
     height: 200px;
     margin-bottom: 20px;
+    /* 가운데 정렬을 위해 display: block과 margin: auto 추가 */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* 컨테이너보다 로고가 클 경우 넘치지 않도록 최대 너비 설정 */
+    max-width: 100%;
+    height: auto; /* 비율 유지 */
 }
+
 .status {
     margin: 10px 0;
-    color: red;
+    color: red; /* 기존 색상 유지 */
+    font-weight: bold; /* 상태를 더 눈에 띄게 */
+    font-size: 1.1em;
 }
+
+#deviceLabel {
+    margin: 15px 0 10px 0; /* 마진 추가 */
+    font-weight: bold;
+    color: #555;
+    font-size: 1.1em;
+}
+
+
 button {
-    margin: 5px 0;
-    padding: 8px 16px;
+    /* 기존 스타일 */
+    /* margin: 5px 0; 이 마진 대신 아래 margin 사용 */
+    /* padding: 8px 16px; 이 패딩 대신 아래 padding 사용 */
+
+    /* `.content-box` 안에서 잘 보이도록 스타일 조정 */
+    display: block; /* 버튼을 블록 요소로 만들어 세로로 쌓이게 함 */
+    width: 100%; /* 컨테이너 너비에 맞춤 */
+    padding: 10px 16px; /* 상하좌우 패딩 */
+    margin: 8px 0; /* 상하 마진, 좌우는 0 */
+    font-size: 1rem;
+    background-color: #007bff; /* 예시 버튼 배경색 */
+    color: white;
+    border: none;
+    border-radius: 5px; /* 모서리 둥글게 */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* 호버 효과 */
 }
+button:hover {
+    background-color: #0056b3; /* 호버 시 색상 변경 */
+}
+
+
 #textOutput {
+    /* 기존 스타일 */
+    /* width: 100%; 기존 너비 사용 */
+    /* height: 100px; 높이 조절 */
+    /* margin: 10px 0; 마진 조절 */
+
     width: 100%;
-    height: 100px;
-    margin: 10px 0;
+    height: 150px; /* 높이 약간 증가 */
+    margin: 20px 0; /* 상하 마진 증가 */
+    padding: 10px; /* 내부 패딩 추가 */
+    border: 1px solid #ddd; /* 테두리 추가 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    box-sizing: border-box; /* padding과 border가 width에 포함 */
+    resize: vertical; /* 세로 크기 조절만 허용 */
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; /* 코드/로그 보기 좋은 글꼴 */
+    font-size: 0.9rem;
+    line-height: 1.4;
+    background-color: #f9f9f9; /* 약간 어두운 배경 */
+    color: #333;
+}
+
+/* 필요에 따라 특정 버튼에 다른 스타일을 줄 수 있습니다. */
+#disconnectBtn {
+    background-color: #dc3545; /* 빨간색 계열 */
+}
+#disconnectBtn:hover {
+    background-color: #c82333;
 }
