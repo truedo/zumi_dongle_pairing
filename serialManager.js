@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (port) {
             if (readLoopActive) await reader.cancel();
             await port.close();
+            elements.connectBtn.disabled = false;
         }
 
         try {
