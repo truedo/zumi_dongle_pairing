@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 포트 새로고침 기능
     // async function refreshPorts() {
     //     const ports = await navigator.serial.getPorts();
-    //     elements.portSelect.innerHTML = ports.map(p => 
+    //     elements.portSelect.innerHTML = ports.map(p =>
     //         `<option value="${p.getInfo().usbVendorId}">${p.getInfo().usbProductId}</option>`
     //     ).join('');
     // }
@@ -66,10 +66,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 연결 핸들러
     async function handleConnect() {
+
+        if (port) {
+            if (readLoopActive) await reader.cancel();
+            await port.close();
+        }
+
         try {
             port = await navigator.serial.requestPort();
             await port.open({ baudRate: 115200 });
-            
+
             updateUIOnConnect();
             readSerial();
         } catch (error) {
