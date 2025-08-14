@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Connection error:', error);
             elements.statusLabel.textContent = '상태: 연결 실패';
+            port = null; // 연결 실패 시 포트 변수 초기화
         }
     }
 
@@ -118,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (port) {
             if (readLoopActive) await reader.cancel();
             await port.close();
+            port = null; // 연결 실패 시 포트 변수 초기화
             resetUIOnDisconnect();
         }
     }
