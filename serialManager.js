@@ -46,13 +46,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // // 페어링 정보 파싱
+    // function parsePairingInfo(text) {
+    //     const match = text.match(/namezumi-\d{4}/);
+    //     if (match) {
+    //         const result = match[0].substring(9);
+    //         elements.deviceLabel.textContent = `페어링 완료: zumi-${result}`;
+    //         elements.deviceLabel.style.color = '#32CD32';
+    //     }
+    // }
+
     // 페어링 정보 파싱
     function parsePairingInfo(text) {
-        const match = text.match(/namezumi-\d{4}/);
-        if (match) {
-            const result = match[0].substring(9);
-            elements.deviceLabel.textContent = `페어링 완료: zumi-${result}`;
-            elements.deviceLabel.style.color = '#32CD32';
+        // Zumi ID 파싱: "namezumi-xxxx" 패턴 찾기
+        const zumiMatch = text.match(/namezumi-(\d{4})/);
+
+        // 채널 정보 파싱: "CH:xx" 패턴 찾기 (CH: 뒤에 2개의 16진수 문자)
+        // 예를 들어, "MY destMAC Address: 80:65:99:A3:34:A8 CH:0C"에서 "0C"를 찾습니다.
+        const channelMatch = text.match(/CH:([0-9A-Fa-f]{2})/);
+
+        let outputText = '';
+
+        if (zumiMatch) {
+            const zumiId = zumiMatch[1]; // zumiMatch[0]은 전체 매칭 문자열, [1]은 캡처 그룹(\d{4})
+            outputText += `페어링 완료: zumi-${zumiId}`;
+            elements.deviceLabel.style.color = '#32CD32'; // 연결 성공 색상으로 변경
+      //  }
+
+       // if (channelMatch) {
+            const hexChannel = channelMatch[1].toUpperCase(); // 16진수 채널 값 (예: "0C")
+            const channel = parseInt(hexChannel, 16); // "0C" -> 12
+
+            // zumiMatch가 성공했든 안 했든 채널 정보가 있으면 출력에 추가
+            if (outputText) {
+                outputText += ` 채널: ${channel}`;
+            } else {
+                 // Zumi ID가 파싱되지 않았는데 채널만 파싱된 경우
+                 outputText = `채널 정보 수신: **${channel}**`;
+            }
+
+            elements.deviceLabel.textContent = outputText;
+        } else if (zumiMatch) {
+             // Zumi ID는 파싱되었으나 채널은 파싱되지 않은 경우
+             elements.deviceLabel.textContent = outputText;
         }
     }
 
