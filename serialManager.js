@@ -78,12 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const channel = parseInt(hexChannel, 16); // "0C" -> 12
 
             // zumiMatch가 성공했든 안 했든 채널 정보가 있으면 출력에 추가
-            if (outputText) {
-                outputText += ` 채널: ${channel}`;
-            } else {
-                 // Zumi ID가 파싱되지 않았는데 채널만 파싱된 경우
-                 outputText = `채널 정보 수신: **${channel}**`;
-            }
+            // if (outputText) {
+            //     outputText += ` 채널: ${channel}`;
+            // } else {
+            //      // Zumi ID가 파싱되지 않았는데 채널만 파싱된 경우
+            //      outputText = `채널 정보 수신: **${channel}**`;
+            // }
 
             elements.deviceLabel.textContent = outputText;
         } else if (zumiMatch) {
