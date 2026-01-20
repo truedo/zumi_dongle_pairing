@@ -13,7 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
         pairBtn: document.getElementById('pairBtn'),
         testBtn: document.getElementById('testBtn'),
         textOutput: document.getElementById('textOutput'),
-        disconnectBtn: document.getElementById('disconnectBtn')
+        disconnectBtn: document.getElementById('disconnectBtn'),
+
+        driverDownloadBtn: document.getElementById('driverDownloadBtn'),
+        exeDownloadBtn: document.getElementById('exeDownloadBtn')
     };
 
     // 포트 새로고침 기능
@@ -98,6 +101,15 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.pairBtn.addEventListener('click', handlePairing);
         elements.testBtn.addEventListener('click', handleTest);
         elements.disconnectBtn.addEventListener('click', handleDisconnect);
+
+        elements.driverDownloadBtn.addEventListener('click', () => {
+            // '_blank'를 넣어 새 창에서 열리도록 설정합니다.
+            window.open('https://drive.google.com/file/d/1B5aLILt0dW99R-X6oW5qXx6myvgxHIs3/view?usp=sharing', '_blank');
+        });
+
+        elements.exeDownloadBtn.addEventListener('click', () => {
+            window.open('https://drive.google.com/file/d/1HIvk1QOYQ4UITVfez_Y57SD-HAFwq4TO/view?usp=sharing', '_blank');
+        });
     }
 
     // 연결 핸들러

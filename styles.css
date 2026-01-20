@@ -104,3 +104,46 @@ button:hover {
 #disconnectBtn:hover {
     background-color: #c82333;
 }
+
+
+/* 신규 섹션 구분선 및 타이틀 */
+.download-section {
+    margin-top: 25px;
+    padding-top: 10px;
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.section-title {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* 가로 배치를 위한 그룹 */
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+/* 보조 버튼 스타일 (테두리 형태) */
+.secondary-btn {
+    flex: 1; /* 반반씩 나눠 갖기 */
+    background-color: transparent !important;
+    color: #666 !important;
+    border: 1px solid #ccc !important;
+    font-size: 0.8rem !important;
+    padding: 8px 5px !important;
+    margin: 0 !important;
+}
+
+.secondary-btn:hover {
+    background-color: #f8f9fa !important;
+    border-color: #999 !important;
+    color: #333 !important;
+}

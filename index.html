@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주미 미니 동글 페어링</title>
+    <title>주미 AI 동글 페어링</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="content-box">
         <img src="logo.png" class="logo" alt="로고">
@@ -21,6 +23,17 @@
         <textarea id="textOutput" readonly></textarea>
 
         <button id="disconnectBtn">연결 끊기</button>
-    </div> <script src="serialManager.js"></script>
+
+        <div class="download-section">
+            <hr class="divider">
+            <p class="section-title">설치 및 다운로드</p>
+            <div class="button-group">
+                <button id="driverDownloadBtn" class="secondary-btn">동글 드라이버 설치</button>
+                <button id="exeDownloadBtn" class="secondary-btn">Windows용 실행 파일(.exe)</button>
+            </div>
+        </div>
+    </div>
+    <script src="serialManager.js"></script>
 </body>
+
 </html>
